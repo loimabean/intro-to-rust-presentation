@@ -9,13 +9,10 @@ const shade = (name: string) =>
   );
 
 export default defineConfig({
-  shortcuts: {
-    "bg-main":
-      "bg-taupe-50 text-taupe-900 dark:bg-taupe-900 dark:text-taupe-200",
-  },
   theme: {
     colors: {
       rust: shade("rust"),
+      taupe: shade("taupe"), // to make sure all shades generate
     },
     // because the headmatter doesn't set it correctly...
     font: {

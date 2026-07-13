@@ -5,7 +5,9 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev",
-    "export": "slidev export"
+    "export": "slidev export",
+    "test": "vitest run",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@slidev/cli": "^52.17.0",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "prettier": "^3.9.5",
-    "prettier-plugin-slidev": "^1.0.5"
+    "prettier-plugin-slidev": "^1.0.5",
+    "vitest": "^4.1.10"
   }
 }

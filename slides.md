@@ -14,6 +14,7 @@ title: Intro to Rust
 info: |
   ## Intro to Rust
   by Charles Inwald & Liam Rust
+
   for NYC Code & Coffee
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: fade-slide | fade-slide-backward
@@ -28,16 +29,16 @@ selectable: true
 
 # Intro to Rust
 
-<img src="./assets/rust-logo.svg" class="dark:invert" width=128>
+<img src="./assets/rust-logo.svg" class="dark:invert" alt="Rust Logo" width=128>
 
 </div>
 
 <LightOrDark>
 <template #dark>
-<img src="./assets/code-and-coffee-logo-light-ampersand.png" width=200 />
+<img src="./assets/code-and-coffee-logo-light-ampersand.png" alt="NYC Code & Coffee Logo" width=200 />
 </template>
 <template #light>
-<img src="./assets/code-and-coffee-logo-dark-ampersand.png" width=200 />
+<img src="./assets/code-and-coffee-logo-dark-ampersand.png" alt="NYC Code & Coffee Logo" width=200 />
 </template>
 </LightOrDark>
 
@@ -157,37 +158,19 @@ layoutClass: gap-8
 
 ::right::
 
-````md magic-move [ownership.rs]
-```rs
+```rust {monaco-run} {autorun:false}
 fn main() {
-    let s1 = String::from("Hello");
+    let s1 = String::from("Hello, world!");
     // Ownership of s1 is moved to s2
     let s2 = s1;
 
-    // Uncommenting this line will result in
-    // a compile-time error
+    // Uncomment the next line and hit run!
     // println!("{}", s1);
 
     // s2 now owns the value
     println!("{}", s2);
 }
 ```
-
-```rs
-fn main() {
-    let s1 = String::from("Hello");
-    // Ownership of s1 is moved to s2
-    let s2 = s1;
-
-    // Uncommenting this line will result in
-    // a compile-time error
-    println!("{}", s1);
-
-    // s2 now owns the value
-    println!("{}", s2);
-}
-```
-````
 
 ---
 layout: two-cols
@@ -204,7 +187,7 @@ layoutClass: gap-8
 
 ::right::
 
-```rs [borrowing.rs] {all|4-6,13-16|8-10,18-21}
+```rust {monaco-run} {autorun:false}
 fn main() {
     let mut s = String::from("Hello");
 
@@ -223,8 +206,8 @@ fn calculate_length(s: &String) -> usize {
 }
 
 // Mutable borrow function
-fn modify string(s: &mut String) {
-    s.push_str(", world"); // We can modify s
+fn modify_string(s: &mut String) {
+    s.push_str(", world!"); // We can modify s
 }
 ```
 
@@ -253,7 +236,7 @@ layoutClass: gap-8
 
 ::right::
 
-```rs [structs.rs]
+```rust {monaco-run} {autorun:false}
 // Define a structure representing a Rectangle
 struct Rectangle {
     width: u32,
@@ -275,6 +258,14 @@ impl Rectangle {
             height: size,
         }
     }
+}
+
+fn main() {
+    let rect = Rectangle { width: 30, height: 50 };
+    println!("Area of rectangle: {}", rect.area());
+
+    let sq = Rectangle::square(10);
+    println!("Area of square: {}", sq.area());
 }
 ```
 
@@ -344,7 +335,7 @@ layoutClass: gap-8
 
 ::right::
 
-```rs [concurrency.rs]
+```rust {monaco-run} {autorun:false}
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -356,7 +347,7 @@ fn main() {
         let handle = thread::spawn(move || {
             for _ in 0..1_000_000 {
                 let mut num = counter.lock().unwrap();
-                num += 1;
+                *num += 1;
             }
         });
         handles.push(handle);
@@ -391,8 +382,7 @@ Rust often infers the lifetime, but you may need to explicitly annotate from tim
 
 ::right::
 
-````md magic-move [lifetime.rs]
-```rs
+```rust {monaco-run} {autorun:false}
 // This function attempts to return a reference
 // to a local variable, which is not allowed
 fn dangling_reference<'a>() -> &'a str {
@@ -407,8 +397,8 @@ fn main() {
 }
 ```
 
-```rs
-// Returning the reference passed to the function (safe)
+<!--
+```rust
 fn no_dangling_reference<'a>(input: &'a str) -> &'a str {
     input
 }
@@ -419,7 +409,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
-````
+-->
 
 ---
 layout: two-cols
@@ -438,7 +428,7 @@ layoutClass: gap-8
 
 ::right::
 
-```rs [match.rs]
+```rust {monaco-run} {autorun:false}
 fn main() {
     let number = 5;
     match number {
