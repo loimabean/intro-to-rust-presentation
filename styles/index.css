@@ -10,18 +10,6 @@
   --color-rust-800: oklch(0.321 0.102 36.83);
   --color-rust-900: oklch(0.233 0.074 36.12);
   --color-rust-950: oklch(0.184 0.059 36.09);
-
-  --color-taupe-50: oklch(98.6% 0.002 67.8);
-  --color-taupe-100: oklch(96% 0.002 17.2);
-  --color-taupe-200: oklch(92.2% 0.005 34.3);
-  --color-taupe-300: oklch(86.8% 0.007 39.5);
-  --color-taupe-400: oklch(71.4% 0.014 41.2);
-  --color-taupe-500: oklch(54.7% 0.021 43.1);
-  --color-taupe-600: oklch(43.8% 0.017 39.3);
-  --color-taupe-700: oklch(36.7% 0.016 35.7);
-  --color-taupe-800: oklch(26.8% 0.011 36.5);
-  --color-taupe-900: oklch(21.4% 0.009 43.1);
-  --color-taupe-950: oklch(14.7% 0.004 49.3);
 }
 
 .slidev-layout {
@@ -32,7 +20,7 @@
 
   @apply bg-taupe-50 text-taupe-900;
 
-  --slidev-code-background: var(--color-taupe-200);
+  --slidev-code-background: theme("colors.shikibg.light");
 
   h1 {
     @apply font-black text-rust-500 border-b-3 pb-4;
@@ -50,12 +38,8 @@
     @apply font-bold;
   }
 
-  .slidev-code {
-    --slidev-code-background: var(--shiki-light-bg);
-  }
-
-  .slidev-code-block-title {
-    @apply bg-taupe-200 text-taupe-700;
+  :not(pre) > code {
+    @apply bg-taupe-200;
   }
 
   .slidev-code .line {
@@ -66,36 +50,47 @@
     @apply text-rust-500;
   }
 
-  .monaco-editor .view-overlays .current-line {
-    @apply bg-taupe-300;
-  }
+  .slidev-monaco-container {
+    @apply flex flex-col max-h-full;
 
-  .slidev-monaco-container-inner {
-    @apply max-h-108;
-  }
-  .slidev-monaco-container-inner + div {
-    @apply overflow-auto;
+    .slidev-monaco-container-inner {
+      @apply min-h-0 flex-initial;
+    }
+    .slidev-monaco-container-inner + div {
+      @apply min-h-0 flex-initial overflow-auto;
+    }
   }
 
   .slidev-vclick-target {
     transition:
       opacity 300ms ease-in-out,
-      transform 300ms ease-in-out;
+      translate 300ms ease-in-out;
   }
 
   .slidev-vclick-hidden {
-    opacity: 0;
-    transform: translateY(4px);
-    pointer-events: none;
+    @apply opacity-0 translate-y-1 pointer-events-none;
   }
 }
 
-/* because the dark is on the html, we need to do this instead of :dark
+.slidev-layout.two-columns:has(.slidev-monaco-container) {
+  @apply grid-rows-[minmax(0,1fr)];
+
+  > .col-left,
+  > .col-right {
+    @apply min-h-0;
+  }
+}
+
+/* because the .dark is on the html, we need to do this instead of dark:...
    otherwise, it produces incorrect css */
 .dark .slidev-layout {
   @apply bg-taupe-900 text-taupe-200;
 
-  --slidev-code-background: var(--color-taupe-800);
+  --slidev-code-background: theme("colors.shikibg.dark");
+
+  :not(pre) > code {
+    @apply bg-taupe-800;
+  }
 
   h1 {
     @apply text-rust-400;
@@ -109,24 +104,12 @@
     @apply text-rust-300;
   }
 
-  .slidev-code {
-    --slidev-code-background: var(--shiki-dark-bg);
-  }
-
-  .slidev-code-block-title {
-    @apply bg-taupe-800 text-taupe-300;
-  }
-
   ul {
-    list-style-type: disc;
+    @apply list-disc;
   }
 
   ul > li::marker {
     @apply text-rust-400;
-  }
-
-  .monaco-editor .view-overlays .current-line {
-    @apply bg-taupe-700:50;
   }
 }
 
