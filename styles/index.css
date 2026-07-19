@@ -32,10 +32,10 @@
 
   strong {
     @apply text-rust-400 font-bold;
-  }
 
-  strong > code {
-    @apply font-bold;
+    > code {
+      @apply font-bold;
+    }
   }
 
   :not(pre) > code {
@@ -46,8 +46,12 @@
     transition: opacity 300ms ease;
   }
 
-  ul > li::marker {
-    @apply text-rust-500;
+  ul {
+    @apply list-disc;
+
+    > li::marker {
+      @apply text-rust-500;
+    }
   }
 
   .slidev-monaco-container {
@@ -102,10 +106,6 @@
 
   strong {
     @apply text-rust-300;
-  }
-
-  ul {
-    @apply list-disc;
   }
 
   ul > li::marker {
