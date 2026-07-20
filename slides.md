@@ -456,7 +456,8 @@ fn main() {
 
 ## Activity
 
-<qrcode class="p-4 bg-white rounded-xl" value="https://example.com" render-as="svg" size=200 />
+<qrcode class="p-4 bg-white rounded-xl" value="https://bit.ly/rust-activity" render-as="svg" size=200 />
+<h2>https://bit.ly/rust-activity</h2>
 
 </div>
 </div>
