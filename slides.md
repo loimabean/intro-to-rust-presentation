@@ -449,8 +449,8 @@ fn main() {
 
 ## These slides
 
-<qrcode class="p-4 bg-white rounded-xl" value="https://example.com" render-as="svg" size=200 />
-
+<qrcode class="p-4 bg-white rounded-xl" value="https://drive.google.com/file/d/17vjYc77oE53Z1Xart7hJsYTq9Xs4PjyU/view?usp=sharing" render-as="svg" size=200 />
+<h2>https://bit.ly/rust-slides</h2>
 </div>
 <div class="flex flex-col items-center gap-8">
 
